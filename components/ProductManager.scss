@@ -1,0 +1,341 @@
+@use "sass:color";
+
+// Variables
+$primary-color: #4361ee;
+$primary-light: #4895ef;
+$secondary-color: #3f37c9;
+$danger-color: #e63946;
+$text-color: #2b2d42;
+$light-text: #6c757d;
+$border-color: #e9ecef;
+$background-light: #f8f9fa;
+$background-white: #ffffff;
+$shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+$transition: all 0.2s ease-in-out;
+
+// Product Manager Main Container
+.product-manager {
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  color: $text-color;
+  padding: 1.5rem;
+  background-color: $background-light;
+  border-radius: 8px;
+  box-shadow: $shadow;
+  
+  h1 {
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    color: $text-color;
+  }
+}
+
+// Filter Input
+.filter-container {
+  margin-bottom: 1.25rem;
+  
+  .filter-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    transition: $transition;
+    
+    &:focus {
+      outline: none;
+      border-color: $primary-light;
+      box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    }
+    
+    &::placeholder {
+      color: $light-text;
+    }
+  }
+}
+
+// Table Styles
+.product-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: $shadow;
+  
+  th, td {
+    padding: 0.9rem 1rem;
+    text-align: left;
+    vertical-align: middle;
+  }
+  
+  th {
+    background-color: $background-white;
+    color: $text-color;
+    font-weight: 600;
+    border-bottom: 2px solid $border-color;
+    position: relative;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+    }
+  }
+  
+  tbody tr {
+    background-color: $background-white;
+    transition: $transition;
+    
+    &:nth-child(even) {
+      background-color: rgba($background-light, 0.5);
+    }
+    
+    &:hover {
+      background-color: rgba($primary-color, 0.05);
+    }
+    
+    td {
+      border-bottom: 1px solid $border-color;
+    }
+  }
+  
+  .no-results {
+    text-align: center;
+    padding: 2rem;
+    color: $light-text;
+    font-style: italic;
+  }
+  
+  .btn {
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+    border: none;
+    font-weight: 500;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: $transition;
+    margin-right: 0.5rem;
+    
+    &-edit {
+      background-color: $primary-color;
+      color: white;
+      
+      &:hover {
+        background-color: color.adjust($primary-color, $lightness: -10%);
+      }
+    }
+    
+    &-delete {
+      background-color: $danger-color;
+      color: white;
+      
+      &:hover {
+        background-color: color.adjust($danger-color, $lightness: -10%);
+      }
+    }
+  }
+}
+
+// Modern Pagination
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: $background-white;
+  border-radius: 8px;
+  box-shadow: $shadow;
+  gap: 1rem;
+  
+  // Info text showing current page info
+  .pagination-info {
+    font-size: 0.9rem;
+    color: $light-text;
+    padding: 0.5rem 0;
+    
+    @media (max-width: 768px) {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  
+  // Pagination buttons container
+  .pagination-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
+    
+    // Individual page buttons
+    .pagination-btn {
+      min-width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $background-white;
+      color: $text-color;
+      border: 1px solid $border-color;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: $transition;
+      
+      &:hover:not(:disabled):not(.active) {
+        background-color: rgba($primary-color, 0.1);
+        border-color: $primary-light;
+        color: $primary-color;
+      }
+      
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      
+      &.active {
+        background-color: $primary-color;
+        color: white;
+        border-color: $primary-color;
+        font-weight: 600;
+        box-shadow: 0 2px 5px rgba($primary-color, 0.3);
+      }
+      
+      // Special styling for navigation buttons
+      &:first-child, &:last-child {
+        font-size: 0.8rem;
+      }
+    }
+    
+    // Ellipsis
+    .ellipsis {
+      min-width: 2rem;
+      text-align: center;
+      color: $light-text;
+      user-select: none;
+    }
+  }
+  
+  // Page size selector
+  .entries-selector {
+    display: flex;
+    align-items: center;
+    
+    @media (max-width: 768px) {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    label {
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+      color: $light-text;
+      
+      select {
+        margin: 0 0.5rem;
+        padding: 0.5rem;
+        border: 1px solid $border-color;
+        border-radius: 6px;
+        background-color: $background-white;
+        color: $text-color;
+        font-size: 0.9rem;
+        transition: $transition;
+        cursor: pointer;
+        
+        &:focus {
+          outline: none;
+          border-color: $primary-light;
+          box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+        }
+        
+        option {
+          padding: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+// Form Container
+.form-container {
+  background-color: $background-white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  box-shadow: $shadow;
+  
+  h2 {
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+    color: $text-color;
+  }
+  
+  .product-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    
+    .form-group {
+      margin-bottom: 1.25rem;
+      
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: $text-color;
+      }
+      
+      input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid $border-color;
+        border-radius: 6px;
+        transition: $transition;
+        
+        &:focus {
+          outline: none;
+          border-color: $primary-light;
+          box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+        }
+      }
+    }
+    
+    .btn-submit {
+      grid-column: 1 / -1;
+      padding: 0.75rem 1.25rem;
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: $transition;
+      
+      &:hover {
+        background-color: color.adjust($primary-color, $lightness: -10%);
+      }
+    }
+  }
+}
+
+// Responsive adjustments for smaller screens
+@media (max-width: 768px) {
+  .product-form {
+    grid-template-columns: 1fr;
+  }
+  
+  .product-table {
+    overflow-x: auto;
+    display: block;
+  }
+}
